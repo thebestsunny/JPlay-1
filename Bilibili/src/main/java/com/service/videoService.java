@@ -58,10 +58,10 @@ public interface videoService {
 
     public void videoThumbCount(int videoId);
 
-    public void videoReport(String username, int videoId);
+    public void videoReport(String email, int videoId);
 
-    public void addVideoUper(String username,int videoId);
+    public void addVideoUper(String email,int videoId);
 
-    public List<Video>showVideoByUper(String username);
+    public List<Video>showVideoByUper(String email);
 
 }

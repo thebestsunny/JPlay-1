@@ -4,6 +4,7 @@ import com.pojo.InterestGroup;
 import com.pojo.Letter;
 import com.pojo.User;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ public interface userService {
     public void createUser(User user);
     public void deleteUser(int userId);
     public void updateUser(User user);
+    public List<User> findAllUser();
     public User findUserById(int userId);
     public User findUserByUsername(String username);
     public User findUserByEmail(String email);

@@ -129,8 +129,8 @@ public class videoServiceImpl implements videoService {
     }
 
     @Override
-    public void videoReport(String username, int videoId) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void videoReport(String email, int videoId) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         VideoReport videoReport = new VideoReport();
         videoReport.setUserId(userId);
         videoReport.setVideoId(videoId);
@@ -138,8 +138,8 @@ public class videoServiceImpl implements videoService {
     }
 
     @Override
-    public void addVideoUper(String username, int videoId) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public void addVideoUper(String email, int videoId) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         VideoUper videoUper = new VideoUper();
         videoUper.setUserId(userId);
         videoUper.setVideoId(videoId);
@@ -147,14 +147,15 @@ public class videoServiceImpl implements videoService {
     }
 
     @Override
-    public List<Video> showVideoByUper(String username) {
-        int userId = userDAO.findUserByUsername(username).getUserId();
+    public List<Video> showVideoByUper(String email) {
+        int userId = userDAO.findUserByEmail(email).getUserId();
         return videoDAO.findVideoListByUserId(userId);
     }
 
     public void setVideoDAO(videoDAO videoDAO) {
         this.videoDAO = videoDAO;
     }
+
     public videoDAO getVideoDAO(){
         return videoDAO;
     }

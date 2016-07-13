@@ -141,7 +141,7 @@
                         '<p>性别：<label><input type="radio" value="" name="user.gender">男</label>'+
                         '<label><input type="radio" value="" name="user.gender">女</label></p>'+
                         '<p>生日：<input type="date" value="" name="user.birthday"></p>'+
-                        '<p>真实姓名：<input type="text" value="" name="user.realname"></p>'+
+                        '<p>真实姓名：<input type="text" value="" name="user.realName"></p>'+
                         '<p>学校：<input type="text" value="" name="user.university"></p>'+
                         '<p>个性签名：<textarea value="" name="user.signature"></textarea></p>'+
                         '<button type="reset" id="reset_button">清 除</button>'+
@@ -428,7 +428,7 @@
                     <label><input type="radio" value="" name="userBean.gender">女</label>
                 </p>
                 <p>生日：<input type="date" value="" name="userBean.birthday"></p>
-                <p>真实姓名：<input type="text" value="" name="userBean.realname"></p>
+                <p>真实姓名：<input type="text" value="" name="userBean.realName"></p>
                 <p>学校：<input type="text" value="" name="user.university"></p>
                 <p>个性签名：<textarea value="" name="userBean.signature"></textarea></p>
                 <button type="reset" id="reset_button">清 除</button>

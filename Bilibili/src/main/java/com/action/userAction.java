@@ -6,6 +6,8 @@ import com.pojo.Video;
 import com.service.userService;
 import com.service.videoService;
 import com.util.timeUtil;
+
+import javax.jws.soap.SOAPBinding;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,32 +21,48 @@ public class userAction extends baseAction {
     private videoService videoService;
     private List<Video> videoBeanList;
     private User userBean;
+    private List<User> userList;
+    private int userId;
     private String username;
     private String gender;
     private String signature;
     private String email;
     private Date birthday;
     private String lastUpdate;
-    private String realname;
+    private String realName;
     private String university;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
+    /** For Administrator **/
     public String deleteUser() throws Exception {
-        userService.deleteUser();
+        userService.deleteUser(userId);
+        return SUCCESS;
     }
 
+    public String listUsers() throws Exception {
+        userList = userService.findAllUser();
+        return SUCCESS;
+    }
+
+    public String updateUser() throws Exception {
+        userBean.setLastUpdate(timeUtil.GetCurrentDatetime());
+        System.out.println("Admin update " + userBean.getEmail());
+        userService.updateUser(userBean);
+    }
+
+    /** For User **/
     public String listMyVideo() throws Exception {
         dataMap.clear();
         Map Session = ActionContext.getContext().getSession();
-        String username = (String)Session.get("username");
-        videoBeanList = videoService.showVideoByUper(username);
-        dataMap.put("videoBeanList",videoBeanList);
+        String email = (String)Session.get("email");
+        videoBeanList = videoService.showVideoByUper(email);
+        dataMap.put("videoBeanList", videoBeanList);
         return SUCCESS;
     }
 
     public String updatePersonalInfo() throws Exception {
         userBean.setLastUpdate(timeUtil.GetCurrentDatetime());
-        System.out.println(userBean.getEmail());
+        System.out.println("User update " + userBean.getEmail());
         userService.updateUser(userBean);
         return SUCCESS;
     }
@@ -113,12 +131,12 @@ public class userAction extends baseAction {
         this.lastUpdate = lastUpdate;
     }
 
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getUniversity() {
@@ -151,5 +169,21 @@ public class userAction extends baseAction {
 
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }
