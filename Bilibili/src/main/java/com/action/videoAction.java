@@ -59,7 +59,7 @@ public class videoAction extends baseAction {
             boolean flag = false;
 
             //获得保存文件的路径
-            ServletContext sctx = getServletContext();
+//            ServletContext sctx = getServletContext();
             //获得文件名
             String basePath = getServletContext().getRealPath("videos");
             //待转码的文件
@@ -78,7 +78,7 @@ public class videoAction extends baseAction {
             video.setVideoId(videoService.findMaxVideoId()+1);
             video.setTitle(title);
             video.setContent(content);
-            video.setLink("videos/"+serialName + ".flv");
+            video.setLink("videos/"+serialName + ".mp4");
             video.setIsPass(new Byte("0"));
             video.setTopic("unknown");
             video.setCreateTime(timeUtil.GetCurrentTime());
@@ -126,7 +126,7 @@ public class videoAction extends baseAction {
         replyListBean = new ArrayList<List<Reply>>();
         videoBean = videoService.findVideoById(videoId);
         commentListBean = commentService.showCommentsByVideoId(videoId);
-        for(int i=0;i<commentListBean.size();i++){
+        for(int i = 0; i < commentListBean.size(); i++){
             replyListBean.add(replyService.showRepliesByCommentId(commentListBean.get(i).getCommentId()));
         }
         return SUCCESS;
@@ -138,7 +138,7 @@ public class videoAction extends baseAction {
         videoBeanList = ftsearchUtil.getResult(keyword);
         System.out.println(videoBeanList.size());
         System.out.println(keyword);
-        System.out.println("熊果");
+//        System.out.println("熊果");
         return SUCCESS;
     }
 
@@ -193,7 +193,6 @@ public class videoAction extends baseAction {
     public void setVideoBean(Video videoBean) {
         this.videoBean = videoBean;
     }
-
 
     public List<Comment> getCommentListBean() {
         return commentListBean;

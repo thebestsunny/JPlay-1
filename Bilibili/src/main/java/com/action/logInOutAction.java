@@ -12,22 +12,23 @@ import com.service.userService;
 public class logInOutAction extends baseAction {
     private static final long serialVersionUID = 1L;
     private userService userService;
-    private String username;
+    private String email;
     private String password;
 
     public String logIn(){
-        if (username.equals("") || password.equals("")) {
+        if (email.equals("") || password.equals("")) {
             return ERROR;
         }
-        Boolean ret = userService.validateUser(username, password);
-        if (ret == false) {
+        Boolean ret = userService.validateUser(email, password);
+        if (!ret) {
             return ERROR;
         }
         Map Session = ActionContext.getContext().getSession();
 //        String md5 = (String)Session.get("md5RandomKey");
 //        System.out.println(password);
 //        System.out.println(md5);
-        Session.put("username", username);
+        Session.put("email", email);
+        Session.put("username", userService.findUserByEmail(email).getUsername());
         if (ret.equals("N")){
             return "user";
         } else {
@@ -37,7 +38,6 @@ public class logInOutAction extends baseAction {
 
     public String logOut(){
         Map Session = ActionContext.getContext().getSession();
-//        Session.remove("username");
         Session.clear();
         return SUCCESS;
     }
@@ -50,14 +50,6 @@ public class logInOutAction extends baseAction {
         this.userService = userService;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -66,4 +58,11 @@ public class logInOutAction extends baseAction {
         this.password = password;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail(){
+        return email;
+    }
 }

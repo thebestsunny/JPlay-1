@@ -16,9 +16,9 @@ public interface userService {
     public User findUserById(int userId);
     public User findUserByUsername(String username);
     public User findUserByEmail(String email);
-    public boolean validateUser(String username,String password);
+    public boolean validateUser(String email, String password);
     public boolean validateRegister(String username,String password,String email);
-    public void sendLetter(String sender,String sendee, String lettercontent);
+    public void sendLetter(String sender,String sendee, String letterContent);
     public void viewLetter(int letterId);
     public void addInterestGroup(String username,int interestgroupId);
     public void subscribeSeries(String username, String seriesName);

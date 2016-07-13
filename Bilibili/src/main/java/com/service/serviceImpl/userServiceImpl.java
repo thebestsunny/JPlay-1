@@ -54,10 +54,10 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public boolean validateUser(String username, String password) {
+    public boolean validateUser(String email, String password) {
         boolean result = true;
         User user;
-        if ((user = findUserByUsername(username)) == null) {
+        if ((user = findUserByEmail(email)) == null) {
             result = false;
             return result;
         }
@@ -70,15 +70,15 @@ public class userServiceImpl implements userService {
     @Override
     public boolean validateRegister(String username, String password, String email) {
         boolean result = true;
-        if ((findUserByUsername(username))!= null || findUserByEmail(email)!=null)
+        if ((findUserByUsername(username)) != null || findUserByEmail(email) != null)
             result = false;
         return result;
     }
 
     @Override
-    public void sendLetter(String sender, String sendee, String lettercontent) {
+    public void sendLetter(String sender, String sendee, String letterContent) {
         Letter letter = new Letter();
-        letter.setLetterContent(lettercontent);
+        letter.setLetterContent(letterContent);
         letter.setSenderId(findUserByUsername(sender).getUserId());
         letter.setReceiverId(findUserByUsername(sendee).getUserId());
         letterDAO.createLetter(letter);

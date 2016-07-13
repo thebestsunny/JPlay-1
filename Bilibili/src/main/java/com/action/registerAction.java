@@ -8,19 +8,20 @@ import com.service.userService;
  */
 public class registerAction extends baseAction {
     private userService userService;
+    private int userId;
     private String username;
     private String password;
     private String email;
 
-    public String execute(){
+    public String execute() {
         User user = new User();
         user.setUsername(username);
         byte[] pwd = password.getBytes();
         user.setPwdhash(pwd);
         byte[] eml = email.getBytes();
         user.setEmail(eml);
-        Boolean ret = userService.validateRegister(username, password,email);
-        if(ret == true) {
+        Boolean ret = userService.validateRegister(username, password, email);
+        if (ret) {
             user.setStatus(new Byte("0"));
             userService.createUser(user);
             return SUCCESS;
@@ -29,11 +30,11 @@ public class registerAction extends baseAction {
             return ERROR;
     }
 
-    public com.service.userService getUserService() {
+    public userService getUserService() {
         return userService;
     }
 
-    public void setUserService(com.service.userService userService) {
+    public void setUserService(userService userService) {
         this.userService = userService;
     }
 
@@ -61,4 +62,11 @@ public class registerAction extends baseAction {
         this.email = email;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

@@ -29,7 +29,11 @@ public class userAction extends baseAction {
     private String university;
     private Map<String, Object> dataMap = new HashMap<String, Object>();
 
-    public String listMyVideo() throws Exception{
+    public String deleteUser() throws Exception {
+        userService.deleteUser();
+    }
+
+    public String listMyVideo() throws Exception {
         dataMap.clear();
         Map Session = ActionContext.getContext().getSession();
         String username = (String)Session.get("username");
@@ -38,7 +42,7 @@ public class userAction extends baseAction {
         return SUCCESS;
     }
 
-    public String updatePersonalInfo() throws Exception{
+    public String updatePersonalInfo() throws Exception {
         userBean.setLastUpdate(timeUtil.GetCurrentDatetime());
         System.out.println(userBean.getEmail());
         userService.updateUser(userBean);
