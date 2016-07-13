@@ -74,7 +74,7 @@ public class commentDAOImpl extends HibernateDaoSupport implements commentDAO {
 
     @Override
     public List<Comment> findCommentsByVideoId(int videoId) {
-        String hql = "select commentId as cid from VideoComment where videoId=?";
+        String hql = "select commentId as cid from VideoComment where videoId=? order by commentId desc ";
         if(getHibernateTemplate().find(hql,videoId).size()==0)
             return null;
         else

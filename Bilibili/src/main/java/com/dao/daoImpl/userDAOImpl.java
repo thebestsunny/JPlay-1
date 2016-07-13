@@ -70,10 +70,10 @@ public class userDAOImpl extends HibernateDaoSupport implements userDAO {
 
     @Override
     public User findUserByEmail(String email) {
-        if(getHibernateTemplate().find("from User as user where user.email = ?", email).size() == 0)
+        if(getHibernateTemplate().find("from User as user where user.email = ?", email.getBytes()).size() == 0)
             return null;
         else
-            return (User)getHibernateTemplate().find("from User as user where user.email = ?",email).get(0);
+            return (User)getHibernateTemplate().find("from User as user where user.email = ?",email.getBytes()).get(0);
     }
 
     @Override
