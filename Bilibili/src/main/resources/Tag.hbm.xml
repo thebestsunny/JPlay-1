@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.pojo.Tag" table="tag" schema="bilibili">
+        <id name="tagName">
+            <column name="tag_name" sql-type="varchar(50)" length="50"/>
+        </id>
+        <set name="tagVideosByTagName" inverse="true">
+            <key>
+                <column name="tag_name"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.pojo.TagVideo"/>
+        </set>
+    </class>
+</hibernate-mapping>

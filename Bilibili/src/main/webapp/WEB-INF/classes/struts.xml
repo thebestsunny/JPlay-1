@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.multipart.maxSize" value="1073741824"/>
+
+    <package name="Bilibili" extends="struts-default, json-default" >
+        <!-- File Upload -->
+        <action name="uploadTestAction" class="uploadTestAction" method="execute">
+            <result name="json"></result>
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">1073741824</param>
+                <param name="allowedTypes">
+                    video/x-msvideo,video/x-dv,video/mp4,video/mpeg,video/mpeg,video/quicktime,video/x-ms-wmv,video/x-flv,video/x-matroska
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+
+        <!-- User -->
+        <action name="registerAction" class="com.action.registerAction" method="execute">
+            <result name="success">index.jsp</result>
+        </action>
+
+        <action name="logInAction" class="com.action.logInOutAction" method="logIn">
+            <result name="success">index.jsp</result>
+            <result name="user">index.jsp</result>
+            <result name="admin">index.jsp</result>
+            <result name="error">login.jsp</result>
+        </action>
+
+        <action name="logOutAction" class="com.action.logInOutAction" method="logOut">
+            <result name="success">index.jsp</result>
+        </action>
+
+        <!-- 上传视频信息 -->
+        <action name="*VideoInfo" class="com.action.videoAction" method = "{1}">
+            <result name="success">/index.jsp</result>
+            <result name="error">/upload.jsp</result>
+        </action>
+
+        <!-- 收藏-->
+        <action name="favCollect" class="com.action.videoFavoriteAction" method="addVideo">
+            <result name="success">/single.jsp</result>
+        </action>
+        <action name="favCollectWithNewFile" class="com.action.videoFavoriteAction" method="createFile">
+            <result name="success">/single.jsp</result>
+        </action>
+
+        <!-- 私信 -->
+        <action name="secretLetter" class="com.action.secretLetterAction" method="sendLetter">
+            <result name="success">/index.jsp</result>
+            <result name="error">/userLetter.jsp</result>
+        </action>
+
+        <action name="letterList" class="com.action.secretLetterAction" method="listLetter">
+            <result name="json" type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+
+        <!--发布评论 -->
+        <action name="commentAction" class="com.action.videoCommentAction" method="commentVideo">
+            <result name="success">single.jsp</result>
+        </action>
+        <!--回复评论-->
+        <action name="replyComment" class="com.action.videoCommentReplyAction" method="replyComment">
+            <result name="success">single.jsp</result>
+        </action>
+        <!--评论点赞-->
+        <action name="thumbComment" class="com.action.videoCommentAction" method="thumbCount">
+            <result name="success">single.jsp</result>
+        </action>
+        <!-- 评论回复的点赞-->
+        <action name="thumbReply" class="com.action.replyAction" method="thumbCount">
+            <result name="success">single.jsp</result>
+        </action>
+
+        <!-- 查看我的兴趣部落 -->
+        <action name="myInterestGroup" class="com.action.interestGroupAction" method="listInterestGroupByUser">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        <!-- 加入兴趣部落-->
+        <action name="addInterestGroup" class="com.action.interestGroupAction" method="addInterestGroup">
+            <result name="success">single.jsp</result>
+        </action>
+
+        <!--查看我的上传 -->
+        <action name="myUpload" class="com.action.userAction" method="listMyVideo">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+
+        <!-- 显示single页面所需数据（如评论专区，video信息等）-->
+        <action name="singleData" class="com.action.videoAction" method="autoPlay">
+            <result name="success">single.jsp</result>
+        </action>
+
+        <!-- 视频点赞功能-->
+        <action name="thumbCount" class="com.action.videoAction" method="thumbCount">
+            <result name="success">single.jsp</result>
+        </action>
+
+
+        <!-- 全文搜索功能(index)-->
+        <action name="searchAction" class="com.action.videoAction" method="search">
+            <result name="success">index.jsp</result>
+        </action>
+    </package>
+
+
+
+</struts>
